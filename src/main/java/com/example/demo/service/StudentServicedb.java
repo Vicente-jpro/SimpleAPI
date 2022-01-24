@@ -30,10 +30,15 @@ public class StudentServicedb implements StudentService{
 
 	@Override
 	public Student getStudent(Long id) {
-	
+	 
 	 Optional<Student> student =  this.studentRepository.findById(id);
 	 return student.get();
 	 
+	}
+
+	@Override
+	public void delete(Long id) {
+	  this.studentRepository.deleteById(id);
 	}
 
 }

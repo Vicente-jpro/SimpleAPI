@@ -8,5 +8,6 @@ public interface StudentService {
 	void create(Student student);
 	List<Student> readAll();
 	Student getStudent(Long id);
+	void delete(Long id);
 
 }
