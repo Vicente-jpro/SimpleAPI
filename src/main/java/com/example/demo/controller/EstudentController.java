@@ -41,18 +41,21 @@ public class EstudentController {
 	}
 	
 	@GetMapping("students")
-	public @ResponseBody List<Student> read() {
+	@ResponseBody
+	public List<Student> read() {
 		return studentServicedb.readAll();
 	}
 	
 	// localhost:8000/student/1?id=idNumber
-	@GetMapping("{id}")
-	public @ResponseBody Student getStudent(@RequestParam Long id){
+	@GetMapping("get")
+	@ResponseBody
+	public Student getStudent(@RequestParam("id") Long id){
 		return this.studentServicedb.getStudent(id);
 	}
 	
-	@DeleteMapping("{id}")
-	public @ResponseBody String Delete(@RequestParam Long id){
+	@DeleteMapping("delete")
+	@ResponseBody
+	public String Delete(@RequestParam("id") Long id){
 		this.studentServicedb.delete(id);
 		return "Student deleted";
 	}
