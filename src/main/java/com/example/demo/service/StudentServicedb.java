@@ -24,16 +24,12 @@ public class StudentServicedb implements StudentService{
 
 	@Override
 	public List<Student> readAll() {
-		
 		return this.studentRepository.findAll();
 	}
 
 	@Override
 	public Student getStudent(Long id) {
-	 
-	 Optional<Student> student =  this.studentRepository.findById(id);
-	 return student.get();
-	 
+	 return this.studentRepository.findById(id).get();
 	}
 
 	@Override
