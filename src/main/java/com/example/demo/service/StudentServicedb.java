@@ -37,4 +37,9 @@ public class StudentServicedb implements StudentService{
 	  this.studentRepository.deleteById(id);
 	}
 
+	@Override
+	public List<Student> search(String keyWord) {
+		return this.studentRepository.searchByKeyWord(keyWord);
+	}
+
 }

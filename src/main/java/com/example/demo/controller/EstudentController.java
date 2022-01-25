@@ -46,7 +46,7 @@ public class EstudentController {
 		return studentServicedb.readAll();
 	}
 	
-	// localhost:8000/student/1?id=idNumber
+	// localhost:8000/student/get
 	@GetMapping("get")
 	@ResponseBody
 	public Student getStudent(@RequestParam("id") Long id){
@@ -60,5 +60,10 @@ public class EstudentController {
 		return "Student deleted";
 	}
 	
+	@GetMapping("search")
+	@ResponseBody
+	public List<Student> search(@RequestParam("keyWord") String keyWord ) {
+		return this.studentServicedb.search(keyWord);
+	}
 	
 }

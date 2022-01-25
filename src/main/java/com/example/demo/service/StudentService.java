@@ -9,5 +9,6 @@ public interface StudentService {
 	List<Student> readAll();
 	Student getStudent(Long id);
 	void delete(Long id);
+	List<Student> search(String keyWord);
 
 }

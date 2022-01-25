@@ -28,15 +28,15 @@ public class Student {
 
 	public Student(String name, String phoneNumber) {
 		super();
-		this.name = name;
-		this.phoneNumber = phoneNumber;
+		this.name = name.trim();
+		this.phoneNumber = phoneNumber.trim();
 	}
 
 	public Student(Long id, String name, String phoneNumber) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.phoneNumber = phoneNumber;
+		this.name = name.trim();
+		this.phoneNumber = phoneNumber.trim();
 	}
 	 
 }
