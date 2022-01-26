@@ -24,6 +24,7 @@
 			  <input type="number" class="form-control" id="id" >
 			</div>
 			<button class="btn btn-info" onclick="saveStudent()">Save</button>
+			<button class="btn btn-info" onclick="cleanFieldsStudent()">Clean fields</button>
 		</form>
 		
 		<script type="text/javascript">
@@ -31,6 +32,12 @@
 		 var id = $('#id').val();
 		 var name = $('#name').val();
 		 var phoneNumber = $('#phoneNumber').val();
+		 
+		 function cleanFieldsStudent(){
+			 $('#id').val("");
+			 $('#name').val("");
+			 $('#phoneNumber').val("");
+		 }
 		 
 		 function saveStudent(){
 			 
