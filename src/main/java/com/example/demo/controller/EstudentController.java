@@ -2,18 +2,14 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,35 +31,35 @@ public class EstudentController {
 	
 	@PostMapping("add")
 	@ResponseBody
-	public String create(@RequestBody Student student ){
+	public ResponseEntity<Student> create(@RequestBody Student student ){
 		studentServicedb.create( student ) ;
-		return "Student saved";
+		return new ResponseEntity<Student>(student, HttpStatus.OK) ;
 	}
 	
 	@GetMapping("students")
 	@ResponseBody
-	public List<Student> read() {
-		return studentServicedb.readAll();
+	public ResponseEntity<List<Student>> read() {
+		return new ResponseEntity<List<Student>>(studentServicedb.readAll(), HttpStatus.OK) ;
 	}
 	
 	// localhost:8000/student/get
 	@GetMapping("get")
 	@ResponseBody
-	public Student getStudent(@RequestParam("id") Long id){
-		return this.studentServicedb.getStudent(id);
+	public ResponseEntity<Student> getStudent(@RequestParam("id") Long id){
+		return new ResponseEntity<Student>( this.studentServicedb.getStudent(id), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("delete")
 	@ResponseBody
-	public String Delete(@RequestParam("id") Long id){
+	public ResponseEntity<?> Delete(@RequestParam("id") Long id){
 		this.studentServicedb.delete(id);
-		return "Student deleted";
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@GetMapping("search")
 	@ResponseBody
-	public List<Student> search(@RequestParam("keyWord") String keyWord ) {
-		return this.studentServicedb.search(keyWord);
+	public ResponseEntity<List<Student>> search(@RequestParam("keyWord") String keyWord ) {
+		return new ResponseEntity<List<Student>>(this.studentServicedb.search(keyWord), HttpStatus.OK) ;
 	}
 	
 }
