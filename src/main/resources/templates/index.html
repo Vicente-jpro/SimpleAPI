@@ -10,7 +10,7 @@
 <body>
 	<main class="container">
 		<h1>Hello Spring boot é ç</h1>
-		<form action="" id="formRegisterStudent">
+		<form action="#" id="formRegisterStudent">
 			<div class="mb-3">
 			  <label for="name" class="form-label">Name</label>
 			  <input type="text" class="form-control" id="name" >
@@ -27,11 +27,12 @@
 		</form>
 		
 		<script type="text/javascript">
+		 
+		 var id = $('#id').val();
+		 var name = $('#name').val();
+		 var phoneNumber = $('#phoneNumber').val();
+		 
 		 function saveStudent(){
-			 var id = $('#id').val();
-			 var name = $('#name').val();
-			 var phoneNumber = $('#phoneNumber').val();
-			 
 			 
 			 // Saving using ajax
 			 $.ajax({
@@ -46,7 +47,10 @@
 				),
 				contentType: "application/json; charset=utf-8",
 				success: function (response){
+					// response has all values from this particular user 
+					
 					alert("Successfully created!");
+					$('#id').val(response.id)
 				}
 			 }).fail( function (xhr, status, errorThrown){
 				   alert("Error. It was not possible created:"+xhr.responseText );
