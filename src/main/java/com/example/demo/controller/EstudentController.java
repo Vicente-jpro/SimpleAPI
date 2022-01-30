@@ -59,7 +59,8 @@ public class EstudentController {
 	@GetMapping("search")
 	@ResponseBody
 	public ResponseEntity<List<Student>> search(@RequestParam("keyWord") String keyWord ) {
-		return new ResponseEntity<List<Student>>(this.studentServicedb.search(keyWord), HttpStatus.OK) ;
+		List<Student> student = this.studentServicedb.search(keyWord.trim());
+		return new ResponseEntity<List<Student>>(student, HttpStatus.OK) ;
 	}
 	
 }
