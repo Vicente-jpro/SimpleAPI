@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 <body>
@@ -42,14 +42,29 @@
         </button>
       </div>
       <div class="modal-body">
+        
         <form>
           <div class="form-group">
             <input type="text" class="form-control" id="recipient-name" placeholder="Search by name, id, phone number">
           </div>
           <div class="form-group">
-          	<button type="button" class="btn btn-primary">Search</button>
+          	<button type="button" class="btn btn-primary" onclick="searchStudent()">Search</button>
           </div>
         </form>
+        
+        <table class="table table-hover" id="search-result">
+		  <thead>
+		    <tr>
+		      <th scope="col">Id</th>
+		      <th scope="col">Name</th>
+		      <th scope="col">Phone Number</th>
+		      <th scope="col">Edit</th>	  
+		    </tr>
+		  </thead>
+		  <tbody>
+		  </tbody>
+		</table>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -61,12 +76,36 @@
 		
 		<script type="text/javascript">
 		 
+		
+		function searchStudent(){
+			
+			 var keyWord = $('#search-result').val();
+			 // Saving using ajax
+			 $.ajax({
+				method: "GET",
+				url: "/student/search", //localhost:8080/student/add
+				data: keyWord,
+				contentType: "application/json; charset=utf-8",
+				success: function (response){
+					// response has all values from this particular user 
+					
+					alert("Successfully created!");
+					$('#id').val(response.id);
+				}
+			 }).fail( function (xhr, status, errorThrown){
+				   alert("Error. It was not possible created:"+xhr.responseText );
+			 } );
+			
+			
+		}
+		
+		
+		
 		 
 		 function saveStudent(){
 			 var id = $('#id').val();
 			 var name = $('#name').val();
 			 var phoneNumber = $('#phoneNumber').val();
-			 alert(id+" "+name+" "+phoneNumber);	 
 			 // Saving using ajax
 			 $.ajax({
 				method: "POST",
@@ -83,25 +122,13 @@
 					// response has all values from this particular user 
 					
 					alert("Successfully created!");
-					$('#id').val(response.id)
+					$('#id').val(response.id);
 				}
 			 }).fail( function (xhr, status, errorThrown){
 				   alert("Error. It was not possible created:"+xhr.responseText );
 			 } );
 		 
 		 }
-		 
-		function searchStudents(){
-			$('#exampleModal').on('show.bs.modal', function (event) {
-				  var button = $(event.relatedTarget) // Button that triggered the modal
-				  var recipient = button.data('whatever') // Extract info from data-* attributes
-				  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-				  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-				  var modal = $(this)
-				  modal.find('.modal-title').text('New message to ' + recipient)
-				  modal.find('.modal-body input').val(recipient)
-				})
-		}
 		 
 		</script>
 		
