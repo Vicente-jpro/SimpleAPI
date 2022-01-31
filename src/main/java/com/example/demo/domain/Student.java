@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,7 @@ import lombok.Setter;
 @Entity	
 @Getter
 @Setter
-public class Student {
+public class Student implements Serializable{
 
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Student;
+import com.example.demo.execeptions.StudentNotFoundExeception;
 import com.example.demo.repository.StudentRepository;
 
 import net.bytebuddy.asm.Advice.This;
@@ -18,8 +19,8 @@ public class StudentServicedb implements StudentService{
 	private StudentRepository studentRepository;
 	
 	@Override
-	public void create(Student student) {
-		this.studentRepository.save(student);
+	public Student create(Student student) {
+		return this.studentRepository.save(student);
 	}
 
 	@Override
@@ -29,7 +30,8 @@ public class StudentServicedb implements StudentService{
 
 	@Override
 	public Student getStudent(Long id) {
-	 return this.studentRepository.findById(id).get();
+	 return this.studentRepository.findById(id)
+			 					  .orElseThrow( () -> new StudentNotFoundExeception("Student not found"));
 	}
 
 	@Override
