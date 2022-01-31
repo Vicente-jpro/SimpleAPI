@@ -31,7 +31,7 @@ public class StudentServicedb implements StudentService{
 	@Override
 	public Student getStudent(Long id) {
 	 return this.studentRepository.findById(id)
-			 					  .orElseThrow( () -> new StudentNotFoundExeception("Student not found"));
+			 					  .orElseThrow( () -> new StudentNotFoundExeception("Student not found. This id = "+id+" do not exist"));
 	}
 
 	@Override
