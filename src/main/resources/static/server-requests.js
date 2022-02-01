@@ -117,7 +117,7 @@ function deleteStudent(id) {
 	}).fail(function(xhr, status, errorThrown) {
 		alert("Error. It was not possible created:" + xhr.responseText);
 	});
-
+//
 }
 
 
