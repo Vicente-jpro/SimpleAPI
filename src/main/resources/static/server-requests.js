@@ -61,8 +61,11 @@ function saveStudent() {
 		contentType: "application/json; charset=utf-8",
 		success: function(response) {
 			// response has all values from this particular user 
-
-			alert("Successfully created!");
+			if ( id == 0){
+				alert("Successfully created student!");
+			}else{
+				alert("Successfully Updated student!");
+			}
 			$('#id').val(response.id);
 
 		}
@@ -102,7 +105,7 @@ function deleteStudent(id) {
 		contentType: "application/json; charset=utf-8",
 		success: function(response) {
 
-			$('.hide-deteted' + id).hide(1500);
+			$('.hide-deteted' + id).hide(300);
 
 		}
 	}).fail(function(xhr, status, errorThrown) {

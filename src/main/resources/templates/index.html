@@ -16,7 +16,7 @@
 
 </head>
 <body>
-	<main class="container">
+	<main class="container my-5">
 		<h1>Simple Student Spring Boot API Using Ajax Request</h1>
 		
 		<form action="#" id="formRegisterStudent">
@@ -29,8 +29,7 @@
 			  <input type="text" class="form-control" id="phoneNumber" >
 			</div>
 			<div class="mb-3">
-			  <label for="id" class="form-label">ID</label>
-			  <input type="number" class="form-control" id="id" >
+			  <input type="hidden" class="form-control" id="id" >
 			</div>
 			<button class="btn btn-info" onclick="saveStudent()">Save</button>
 			<button class="btn btn-info" onclick="this.form.reset();">New Student</button>
