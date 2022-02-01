@@ -83,12 +83,16 @@
 		function searchStudent(){
 			
 			 var keyWord = $('#key-word-from-form-seach').val();
-			 	 
+			 
+			 if (keyWord.length < 1){
+				 alert("Error on seaching student: Type at least a letters");
+			 }else{
+				 
+			 
 				// Saving using ajax
 				 $.ajax({
 					method: "GET",
-					url: "/student/search", //localhost:8080/student/add
-					data: "keyWord="+keyWord,
+					url: "/student/search/"+keyWord, 
 					contentType: "application/json; charset=utf-8",
 					success: function (response){
 						// response has all values from this particular user 
@@ -96,12 +100,12 @@
 						$('#search-result > tbody > tr').remove();
 						for (var i = 0; i < response.length; i++){
 							$('#search-result > tbody ').append(
-														'<tr id="student-row-deleted">'
+														'<tr class="hide-deteted'+response[i].id+'"+>'
 														+'<td>'+response[i].id+'</td>'
 														+'<td>'+response[i].name+'</td>'
 														+'<td>'+response[i].phoneNumber+'</td>'
 														+'<td> <i class="bi-pencil-square" onclick="edit('+response[i].id+')"></i></td>'
-														+'<td> <i class="bi-trash-fill" onclick="deleteStudent('+response[i].id+')"></i> </td>'
+														+'<td> <i class="bi-trash-fill " onclick="deleteStudent('+response[i].id+')"></i> </td>'
 														+'</tr>'
 								);
 						}
@@ -109,7 +113,9 @@
 				 }).fail( function (xhr, status, errorThrown){
 					   alert("Error. It was not possible created:"+xhr.responseText );
 				 } );
-			
+				
+				
+			 }
 			
 		}
 		
@@ -149,8 +155,7 @@
 				// Saving using ajax
 				 $.ajax({
 					method: "GET",
-					url: "/student/get", //localhost:8080/student/add
-					data: "id="+id,
+					url: "/student/get/"+id, 
 					contentType: "application/json; charset=utf-8",
 					success: function (response){
 						// response has all values from this particular user 
@@ -172,12 +177,11 @@
 				// Saving using ajax
 				 $.ajax({
 					method: "DELETE",
-					url: "/student/delete", //localhost:8080/student/add
-					data: "id="+id,
+					url: "/student/delete/"+id, 
 					contentType: "application/json; charset=utf-8",
 					success: function (response){
 		
-						$('#student-row-deleted').hide();
+						$('.hide-deteted'+id).hide(1500);
 						
 					}
 				 }).fail( function (xhr, status, errorThrown){

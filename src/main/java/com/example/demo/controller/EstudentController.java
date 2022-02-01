@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,8 +49,6 @@ public class EstudentController {
 	// localhost:8000/student/get
 	@GetMapping("get/{id}")
 	@ResponseBody
-	// Front and ajax use @RequestParam("id")
-	// Angular use @PathVariable("id")
 	public ResponseEntity<Student> getStudent(@PathVariable("id") Long id){
 		return new ResponseEntity<Student>( this.studentServicedb.getStudent(id), HttpStatus.OK);
 	}
