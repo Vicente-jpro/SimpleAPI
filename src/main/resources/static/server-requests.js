@@ -61,9 +61,9 @@ function saveStudent() {
 		contentType: "application/json; charset=utf-8",
 		success: function(response) {
 			// response has all values from this particular user 
-			if ( id == 0){
+			if (id == 0) {
 				alert("Successfully created student!");
-			}else{
+			} else {
 				alert("Successfully Updated student!");
 			}
 			$('#id').val(response.id);
@@ -77,22 +77,28 @@ function saveStudent() {
 
 function edit(id) {
 	// Saving using ajax
-	$.ajax({
-		method: "GET",
-		url: "/student/get/" + id,
-		contentType: "application/json; charset=utf-8",
-		success: function(response) {
-			// response has all values from this particular user 
+	if (id <= 0) {
+		alert("Select a student to delete");
+	} else {
 
-			$('#id').val(response.id);
-			$('#name').val(response.name);
-			$('#phoneNumber').val(response.phoneNumber);
-			//$('#exampleModal').modal('hide');
-		}
-	}).fail(function(xhr, status, errorThrown) {
-		alert("Error. It was not possible created:" + xhr.responseText);
-	});
 
+
+		$.ajax({
+			method: "GET",
+			url: "/student/get/" + id,
+			contentType: "application/json; charset=utf-8",
+			success: function(response) {
+				// response has all values from this particular user 
+
+				$('#id').val(response.id);
+				$('#name').val(response.name);
+				$('#phoneNumber').val(response.phoneNumber);
+				//$('#exampleModal').modal('hide');
+			}
+		}).fail(function(xhr, status, errorThrown) {
+			alert("Error. It was not possible created:" + xhr.responseText);
+		});
+	}
 }
 
 
@@ -105,7 +111,7 @@ function deleteStudent(id) {
 		contentType: "application/json; charset=utf-8",
 		success: function(response) {
 
-			$('.hide-deteted' + id).hide(300);
+			$('.hide-deteted' + id).hide();
 
 		}
 	}).fail(function(xhr, status, errorThrown) {
