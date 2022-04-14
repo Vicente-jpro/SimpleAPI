@@ -44,29 +44,31 @@ class IntegrationText {
 	public void readAll() {
 	
 		List<Student> students = studentServicedb.readAll();
-		System.out.println("\n\n Number o Students"+students.size()+"\n\n");
 		assertEquals( students.isEmpty(), false );
 		
 	}
 	
 	@Test
+	@DisplayName("Get student")
+	public void getStudent() {
+		student = studentServicedb.findLastStudent();
+		
+		Student st = studentServicedb.getStudent( (long) student.getId() );
+		assertEquals( st.getName(), "Vicente" );
+	}
+	
+	@Test
 	@DisplayName("Delete student saved")
-	@Sql(statements = "INSERT INTO student (name, phone_number) values ('Vicente', '944889722')")
 	public void delete() {
-		student = studentServicedb.findByName("Vicente");
+		student = studentServicedb.findLastStudent();
+		
 		studentServicedb.delete( (long) student.getId() );
 	}
 	
+
 	/*
-	 * @Override public Student create(Student student) { return
-	 * this.studentRepository.save(student); }
 	 * 
-	 * 
-	 * 
-	 * @Override public Student getStudent(Long id) { return
-	 * this.studentRepository.findById(id) .orElseThrow( () -> new
-	 * StudentNotFoundExeception("Student not found. This id = "+id+" do not exist")
-	 * ); }
+	 *
 	 * 
 	 * @Override public void delete(Long id) {
 	 * this.studentRepository.deleteById(id); }

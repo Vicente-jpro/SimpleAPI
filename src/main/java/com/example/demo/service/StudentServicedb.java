@@ -48,8 +48,8 @@ public class StudentServicedb implements StudentService{
 		this.studentRepository.deleteAll();
 	}
 	
-	public Student findByName(String name) {
-		return this.findByName(name);
+	public Student findLastStudent() {
+		return this.studentRepository.findLastStudent();
 	}
 
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Simple API</title>
+ <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="server-requests.js"></script>
+	<!-- Bootstrap ICON -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+	<main class="container my-5">
+		<h1>Simple Student Spring Boot API Using Ajax Request</h1>
+		
+		<form action="#" id="formRegisterStudent">
+			<div class="mb-3">
+			  <label for="name" class="form-label">Name</label>
+			  <input type="text" class="form-control" id="name" >
+			</div>
+			<div class="mb-3">
+			  <label for="phoneNumber" class="form-label">PhoneNumber</label>
+			  <input type="text" class="form-control" id="phoneNumber" >
+			</div>
+			<div class="mb-3">
+			  <input type="hidden" class="form-control" id="id" >
+			</div>
+			<button class="btn btn-info" onclick="saveStudent()">Save</button>
+			<button class="btn btn-info" onclick="this.form.reset();">New Student</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Search users</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Search students</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" id="key-word-from-form-seach" placeholder="Search by name">
+          </div>
+          <div class="form-group">
+          	<button type="button" class="btn btn-primary" onclick="searchStudent()" >Search</button>
+          </div>
+        </form>
+        
+        <table class="table table-hover" id="search-result">
+		  <thead>
+		    <tr>
+		      <th scope="col">Id</th>
+		      <th scope="col">Name</th>
+		      <th scope="col">Phone Number</th>
+		      <th scope="col">Edit</th>	  
+		    </tr>
+		  </thead>
+		  <tbody>
+		  </tbody>
+		</table>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+		</form>
+				
+	</main>
+
+</body>
+</html>

@@ -14,5 +14,6 @@ public interface StudentRepository extends JpaRepository<Student, Long>{
 	@Query( value = "SELECT s FROM Student s where s.name like %?1% order by id")
 	List<Student> searchByKeyWord(String keyWord);
 	
-	Student findByName(String name);
+	@Query( value = "SELECT * FROM student WHERE id=(SELECT max(id) FROM student)", nativeQuery = true)
+	Student findLastStudent();
 }
