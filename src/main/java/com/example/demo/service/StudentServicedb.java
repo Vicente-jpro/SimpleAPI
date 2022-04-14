@@ -43,5 +43,13 @@ public class StudentServicedb implements StudentService{
 	public List<Student> search(String keyWord) {
 		return this.studentRepository.searchByKeyWord(keyWord);
 	}
+	
+	public void deleteAll() {
+		this.studentRepository.deleteAll();
+	}
+	
+	public Student findByName(String name) {
+		return this.findByName(name);
+	}
 
 }
