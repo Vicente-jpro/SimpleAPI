@@ -2,6 +2,8 @@ package com.example.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
@@ -13,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.web.client.RestTemplate;
@@ -36,28 +39,29 @@ class StudentControllerTest {
 	@Test
 	@DisplayName("Get all students when there is")
 	@Sql(statements = "INSERT INTO student (name, phone_number) values ('Vicente', '944889722')")
-	public void readAll() {
-		ResponseEntity<Student> students = testRestTemplate.getForEntity("/students", Student.class);
+	public void readAll() throws URISyntaxException {
+		ResponseEntity<Student> students = testRestTemplate.getForEntity(new URI("/students"), Student.class);
 		assertEquals( students.hasBody() , true );
+		assertEquals( students.getStatusCode() , HttpStatus.OK );
 	}
 	
 	
 	@Test
 	@DisplayName("Get student")
-	public void getStudent() {
+	public void getStudent() throws URISyntaxException {
 		student = studentServicedb.findLastStudent();	
-		System.err.println(student.toString());
-		ResponseEntity<Student> st = testRestTemplate.getForEntity("/get/"+student.getId(), Student.class);
+		System.err.println(student);
+		ResponseEntity<Student> st = testRestTemplate.getForEntity(new URI("get/"+student.getId()), Student.class);
 		assertEquals( st.getBody().getName() , "Vicente" );
 	}
 	
 	@Test
 	@DisplayName("Delete student saved")
-	public void delete() {
-		student = studentServicedb.findLastStudent();
-		
-		studentServicedb.delete( (long) student.getId() );
-		assertEquals( student.getId() > 0, student.getId() > 0 );
+	public void delete() throws URISyntaxException {
+		student = studentServicedb.findLastStudent();	
+		System.err.println(student);
+		ResponseEntity<Student> st = testRestTemplate.getForEntity(new URI("delete/"+student.getId()), Student.class);
+		assertEquals( st.getBody().getName() , "Vicente" );
 	}
 		
 	

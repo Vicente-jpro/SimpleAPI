@@ -10,10 +10,12 @@ import javax.persistence.Id;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity	
 @Getter
 @Setter
+@ToString
 public class Student implements Serializable{
 
 	 @Id
@@ -41,5 +43,6 @@ public class Student implements Serializable{
 		this.name = name.trim();
 		this.phoneNumber = phoneNumber.trim();
 	}
+	
 	 
 }
